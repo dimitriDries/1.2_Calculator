@@ -25,6 +25,63 @@ function plus () {
 
 }
 
+function minus () {
+    //get field value and store as value one:
+    var calculationField = document.getElementById("calculationField");
+    var valueOne = calculationField.textContent;
+    localStorage.setItem('valueOne', valueOne);
+    localStorage.setItem('operator', "-");
+
+    //delete field content (value one is now stored)
+    calculationField.textContent = "";
+
+    //Log localstorage value (omgezet naar nummer: parseFloat)
+    var getValueOne = window.localStorage.getItem('valueOne');
+    var getOperator = window.localStorage.getItem('operator');
+
+    console.log(parseFloat(getValueOne));
+    console.log(getOperator);
+
+}
+
+function multiply () {
+    //get field value and store as value one:
+    var calculationField = document.getElementById("calculationField");
+    var valueOne = calculationField.textContent;
+    localStorage.setItem('valueOne', valueOne);
+    localStorage.setItem('operator', "*");
+
+    //delete field content (value one is now stored)
+    calculationField.textContent = "";
+
+    //Log localstorage value (omgezet naar nummer: parseFloat)
+    var getValueOne = window.localStorage.getItem('valueOne');
+    var getOperator = window.localStorage.getItem('operator');
+
+    console.log(parseFloat(getValueOne));
+    console.log(getOperator);
+
+}
+
+function divide () {
+    //get field value and store as value one:
+    var calculationField = document.getElementById("calculationField");
+    var valueOne = calculationField.textContent;
+    localStorage.setItem('valueOne', valueOne);
+    localStorage.setItem('operator', "/");
+
+    //delete field content (value one is now stored)
+    calculationField.textContent = "";
+
+    //Log localstorage value (omgezet naar nummer: parseFloat)
+    var getValueOne = window.localStorage.getItem('valueOne');
+    var getOperator = window.localStorage.getItem('operator');
+
+    console.log(parseFloat(getValueOne));
+    console.log(getOperator);
+
+}
+
 function calculate () {
     var calculationField = document.getElementById("calculationField");
     var getValueOne = window.localStorage.getItem('valueOne');
