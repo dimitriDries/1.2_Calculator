@@ -3,29 +3,37 @@ console.log("complexCalculator.js loaded succesfully");
 //add clicked number in field:
 function addNumber (clickedNumber) {
     var calculationField = document.getElementById("calculationField");
-    var getLocalStorage = window.localStorage.getItem('valueOne');
-    calculationField.textContent += clickedNumber;
-
-    // TO DO
-    if (getLocalStorage > 0 && calculationField !== "") {
-        console.log(parseFloat(getLocalStorage));
-    } else {
-        console.log("no local storage");
-    }
-    
+    calculationField.textContent += clickedNumber;    
 }
 
 function plus () {
-    var valueOne = document.getElementById("calculationField").textContent;
-    var numValueOne = valueOne;
+    //get field value and store as value one:
     var calculationField = document.getElementById("calculationField");
-     //get field value and store as value one:
-    localStorage.setItem('valueOne', numValueOne);
-    //delete field content (value one is now stored)
+    var valueOne = calculationField.textContent;
+    localStorage.setItem('valueOne', valueOne);
+    localStorage.setItem('operator', "+");
 
-    var getLocalStorage = window.localStorage.getItem('valueOne');
-    //parseFloat = waarde omzetten naar number
-    console.log(parseFloat(getLocalStorage))
+    //delete field content (value one is now stored)
+    calculationField.textContent = "";
+
+    //Log localstorage value (omgezet naar nummer: parseFloat)
+    var getValueOne = window.localStorage.getItem('valueOne');
+    var getOperator = window.localStorage.getItem('operator');
+
+    console.log(parseFloat(getValueOne));
+    console.log(getOperator);
+
+}
+
+function calculate () {
+    var calculationField = document.getElementById("calculationField");
+    var getValueOne = window.localStorage.getItem('valueOne');
+    var getOperator = window.localStorage.getItem('operator');
+    var valueTwo = document.getElementById("calculationField").textContent;
+    console.log(valueTwo);
+    var calculation = getValueOne + getOperator + valueTwo;
+    console.log(eval(calculation));
+    calculationField.textContent = eval(calculation);
 }
 
 function clearField() {
