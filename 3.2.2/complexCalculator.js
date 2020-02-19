@@ -1,101 +1,50 @@
 console.log("complexCalculator.js loaded succesfully");
+var calculationArray = [];
 
-//add clicked number in field:
+//add clicked number in field AND add number to array
 function addNumber (clickedNumber) {
+    //Loop verwijderd de eventlisteners van alle nummer buttons en zet vervolgens een eventlistener erop (addNumber)
+    var numButton = document.getElementsByClassName("num_btn");
+    for (var i=0; i<numButton.length; i++){
+        var toClear = numButton.item(i);
+        toClear.removeEventListener("click", clearField);
+   }
+
     var calculationField = document.getElementById("calculationField");
-    calculationField.textContent += clickedNumber;    
+    calculationField.textContent += clickedNumber;
 }
 
+function calculate () {
+    console.log(calculationArray.join(''));
+}
+
+
 function plus () {
-    //get field value and store as value one:
-    var calculationField = document.getElementById("calculationField");
-    var valueOne = calculationField.textContent;
-    localStorage.setItem('valueOne', valueOne);
-    localStorage.setItem('operator', "+");
+//1. class aanpassen naar blijvend donkerder
+//2. + wegschrijven in array
+//3. Bij eerst volgende nummer geselecteerd: view clearen en overschrijven door aangeklikte nummer
 
-    //delete field content (value one is now stored)
-    calculationField.textContent = "";
-
-    //Log localstorage value (omgezet naar nummer: parseFloat)
-    var getValueOne = window.localStorage.getItem('valueOne');
-    var getOperator = window.localStorage.getItem('operator');
-
-    console.log(parseFloat(getValueOne));
-    console.log(getOperator);
-
+        var valueOne = calculationField.textContent;
+        var operator = "+";
+        return calculationArray.push(valueOne) + calculationArray.push(operator);
 }
 
 function minus () {
-    //get field value and store as value one:
-    var calculationField = document.getElementById("calculationField");
-    var valueOne = calculationField.textContent;
-    localStorage.setItem('valueOne', valueOne);
-    localStorage.setItem('operator', "-");
-
-    //delete field content (value one is now stored)
-    calculationField.textContent = "";
-
-    //Log localstorage value (omgezet naar nummer: parseFloat)
-    var getValueOne = window.localStorage.getItem('valueOne');
-    var getOperator = window.localStorage.getItem('operator');
-
-    console.log(parseFloat(getValueOne));
-    console.log(getOperator);
 
 }
 
 function multiply () {
-    //get field value and store as value one:
-    var calculationField = document.getElementById("calculationField");
-    var valueOne = calculationField.textContent;
-    localStorage.setItem('valueOne', valueOne);
-    localStorage.setItem('operator', "*");
-
-    //delete field content (value one is now stored)
-    calculationField.textContent = "";
-
-    //Log localstorage value (omgezet naar nummer: parseFloat)
-    var getValueOne = window.localStorage.getItem('valueOne');
-    var getOperator = window.localStorage.getItem('operator');
-
-    console.log(parseFloat(getValueOne));
-    console.log(getOperator);
 
 }
 
 function divide () {
-    //get field value and store as value one:
-    var calculationField = document.getElementById("calculationField");
-    var valueOne = calculationField.textContent;
-    localStorage.setItem('valueOne', valueOne);
-    localStorage.setItem('operator', "/");
 
-    //delete field content (value one is now stored)
-    calculationField.textContent = "";
-
-    //Log localstorage value (omgezet naar nummer: parseFloat)
-    var getValueOne = window.localStorage.getItem('valueOne');
-    var getOperator = window.localStorage.getItem('operator');
-
-    console.log(parseFloat(getValueOne));
-    console.log(getOperator);
-
-}
-
-function calculate () {
-    var calculationField = document.getElementById("calculationField");
-    var getValueOne = window.localStorage.getItem('valueOne');
-    var getOperator = window.localStorage.getItem('operator');
-    var valueTwo = document.getElementById("calculationField").textContent;
-    console.log(valueTwo);
-    var calculation = getValueOne + getOperator + valueTwo;
-    console.log(eval(calculation));
-    calculationField.textContent = eval(calculation);
 }
 
 function clearField() {
     var calculationField = document.getElementById("calculationField");
-    calculationField.textContent = "";
+    calculationField.textContent="";
+
 }
 
 //Opties: 
