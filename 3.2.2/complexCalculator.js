@@ -65,8 +65,9 @@ function activateOperator () {
     event.target.classList = "operatorActive";
 }
 
-function plus () {
+function secondaryOperator () {
     activateOperator();
+    operatorArray.length = 0;
     //---------- Array changes start ------------------------------------------------------------------
     var newValue = view.textContent;
     var operator = event.target.innerHTML;
@@ -83,24 +84,6 @@ function plus () {
     console.log(numbersArray, operatorArray);
     //---------- Calculation + array update end ------------------------------------------------------------------
 
-}
-
-function minus () {
-    activateOperator();
-    //---------- Array changes start ------------------------------------------------------------------
-    var newValue = view.textContent;
-    var operator = "-";
-    numbersArray.push(newValue) + operatorArray.push(operator);
-    console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
-    //---------- Array changes end ------------------------------------------------------------------
-
-    //---------- Calculation / view + array update start ------------------------------------------------------------------
-    if (numbersArray.length>1){
-        view.textContent = eval(numbersArray[numbersArray.length-2]+operatorArray[this.length]+numbersArray[numbersArray.length-1]);
-        numbersArray.push(view.textContent);
-    }
-    console.log(numbersArray, operatorArray);
-    //---------- Calculation + array update end ------------------------------------------------------------------
 }
 
 function multiply () {
