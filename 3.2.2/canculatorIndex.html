@@ -10,26 +10,26 @@
 
     <h2>Calculator</h2>
     <div class="calculator">
-    <div class="calc_field" id="calculationField"></div>
-      <button class="num_btn">1</button>
-      <button class="num_btn">2</button>
-      <button class="num_btn">3</button>
-      <button class ="calc_btn" onclick="plus()">+</button>
+    <div class="calc_field" id="view"></div>
+      <button class="num_btn" onclick="addNumber()">1</button>
+      <button class="num_btn" onclick="addNumber()">2</button>
+      <button class="num_btn" onclick="addNumber()">3</button>
+      <button class ="operator" id="plus" onclick="plus()">+</button>
       <br>
-      <button class="num_btn">4</button>
-      <button class="num_btn">5</button>
-      <button class="num_btn">6</button>
-      <button class ="calc_btn" onclick="minus()">-</button>
+      <button class="num_btn" onclick="addNumber()">4</button>
+      <button class="num_btn" onclick="addNumber()">5</button>
+      <button class="num_btn" onclick="addNumber()">6</button>
+      <button class ="operator" id="minus" onclick="minus()">-</button>
       <br>
-      <button class="num_btn">7</button>
-      <button class="num_btn">8</button>
-      <button class="num_btn">9</button>
-      <button class ="calc_btn" onclick="multiply()">*</button>
+      <button class="num_btn" onclick="addNumber()">7</button>
+      <button class="num_btn" onclick="addNumber()">8</button>
+      <button class="num_btn" onclick="addNumber()">9</button>
+      <button class ="operator" id="multiply" onclick="multiply()">*</button>
       <br>
-      <button class="functional_btn" onclick="clearField()">C</button>
-      <button class="num_btn">0</button>
+      <button class="functional_btn" onclick="clearAll()">AC</button>
+      <button class="num_btn" onclick="addNumber()">0</button>
       <button class="functional_btn" onclick="calculate()">=</button>
-      <button class ="calc_btn" onclick="divide()">/</button>
+      <button class ="operator" id="divide" onclick="divide()">/</button>
     </div>
 
       <!--JS files below-->
