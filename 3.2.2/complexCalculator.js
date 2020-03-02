@@ -26,13 +26,13 @@ function addNumber () {
     //Loop verwijderd de eventlisteners van alle nummer buttons en zet vervolgens een eventlistener erop (addNumber)
     for (var i=0; i<numButton.length; i++){
         var toClear = numButton.item(i);
-        toClear.removeEventListener("mousedown", clearField);
+        toClear.removeEventListener("mousedown", clearView);
    }
    //Adds the clicked number to the view
     view.textContent += event.target.innerHTML;
 }
 
-function clearField() {
+function clearView() {
     //Clear view
     view.textContent="";
     //Clear active operator class
@@ -51,31 +51,31 @@ function clearAll() {
     operatorArray.length = 0;
 }
 
-function plus () {
-    //--------- CSS changes start -------------------------------------------------------
+function activateOperator () {
     var activeOperator = document.getElementsByClassName("operatorActive");
-    //If there is no active operator yet, clear field when next number is pressed
+    //If there is no active operator yet, clear field when next number is pressed ELSE reset class
     if (activeOperator.length === 0){
         for (i=0; i<numButton.length; i++){
-            numButton[i].addEventListener("mousedown", clearField);
+            numButton[i].addEventListener("mousedown", clearView);
         }
+    } else {
+        for (i=0; i<activeOperator.length; i++){activeOperator[i].classList = "operator";}
     }
-
-    //if there is at least one active operator, reset class of that operator
-    if (activeOperator[0] !== undefined) {activeOperator.classList = "operator";}
-
     //activate this operator
-    plusButton.classList = "operatorActive";
-    //---------- CSS changes end ------------------------------------------------------------------
+    event.target.classList = "operatorActive";
+}
 
+function plus () {
+    activateOperator();
     //---------- Array changes start ------------------------------------------------------------------
     var newValue = view.textContent;
-    var operator = "+";
+    var operator = event.target.innerHTML;
     numbersArray.push(newValue) + operatorArray.push(operator);
     console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
     //---------- Array changes end ------------------------------------------------------------------
 
-    //---------- Calculation/ view + array update start ------------------------------------------------------------------
+    //---------- Calculation / view + array update start ------------------------------------------------------------------
+    //If there is already a number in the numbers array, calculate
     if (numbersArray.length>1){
         view.textContent = eval(numbersArray[numbersArray.length-2]+operatorArray[this.length]+numbersArray[numbersArray.length-1]);
         numbersArray.push(view.textContent);
@@ -86,22 +86,7 @@ function plus () {
 }
 
 function minus () {
-    //--------- CSS changes start -------------------------------------------------------
-    var activeOperator = document.getElementsByClassName("operatorActive");
-    //If there is no active operator yet, clear field when next number is pressed
-    if (activeOperator.length === 0){
-        for (i=0; i<numButton.length; i++){
-            numButton[i].addEventListener("mousedown", clearField);
-        }
-    }
-
-    //if there is at least one active operator, reset class of that operator
-    if (activeOperator[0] !== undefined) {activeOperator.classList = "operator";}
-
-    //activate this operator
-    minusButton.classList = "operatorActive";
-    //---------- CSS changes end ------------------------------------------------------------------
-
+    activateOperator();
     //---------- Array changes start ------------------------------------------------------------------
     var newValue = view.textContent;
     var operator = "-";
@@ -109,7 +94,7 @@ function minus () {
     console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
     //---------- Array changes end ------------------------------------------------------------------
 
-    //---------- Calculation/ view + array update start ------------------------------------------------------------------
+    //---------- Calculation / view + array update start ------------------------------------------------------------------
     if (numbersArray.length>1){
         view.textContent = eval(numbersArray[numbersArray.length-2]+operatorArray[this.length]+numbersArray[numbersArray.length-1]);
         numbersArray.push(view.textContent);
@@ -119,29 +104,14 @@ function minus () {
 }
 
 function multiply () {
-        //--------- CSS changes start -------------------------------------------------------
-        var activeOperator = document.getElementsByClassName("operatorActive");
-        //If there is no active operator yet, clear field when next number is pressed
-        if (activeOperator.length === 0){
-            for (i=0; i<numButton.length; i++){
-                numButton[i].addEventListener("mousedown", clearField);
-            }
-        }
-    
-        //if there is at least one active operator, reset class of that operator
-        if (activeOperator[0] !== undefined) {activeOperator.classList = "operator";}
-    
-        //activate this operator
-        multiplyButton.classList = "operatorActive";
-        //---------- CSS changes end ------------------------------------------------------------------
-    
-        //---------- Array changes start ------------------------------------------------------------------
-        var newValue = view.textContent;
-        var operator = "-";
-        numbersArray.push(newValue) + operatorArray.push(operator);
-        console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
-        //---------- Array changes end ------------------------------------------------------------------
-    
+    activateOperator();
+    //---------- Array changes start ------------------------------------------------------------------
+    var newValue = view.textContent;
+    var operator = "-";
+    numbersArray.push(newValue) + operatorArray.push(operator);
+    console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
+    //---------- Array changes end ------------------------------------------------------------------
+
 }
 
 function divide () {
