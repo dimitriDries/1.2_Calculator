@@ -98,21 +98,7 @@ function plus () {
 }
 
 function minus () {
-
-    //---------- Calculation / view + array update start ------------------------------------------------------------------
-    if (numbersArray.length>1){
-        calculate()
-    }
-    console.log(numbersArray, operatorArray);
-    //---------- Calculation + array update end ------------------------------------------------------------------
-
-    activateOperator();
-    //---------- Array changes start ------------------------------------------------------------------
-    var newValue = view.textContent;
-    var operator = "-";
-    numbersArray.push(newValue) + operatorArray.push(operator);
-    console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
-    //---------- Array changes end ------------------------------------------------------------------
+    
 }
 
 function multiply () {
