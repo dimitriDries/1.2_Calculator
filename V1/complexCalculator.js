@@ -51,8 +51,8 @@ function clearAll() {
 
 function resetOperators () {
         var activeOperator = document.getElementsByClassName("operatorActive");
-       //reset active operator
-       for (i=0; i<activeOperator.length; i++){
+        //reset active operator
+        for (i=0; i<activeOperator.length; i++){
         activeOperator[i].classList = "operator";
     }
 }
@@ -77,38 +77,33 @@ function clearArrays () {
     operatorArray.length = 0;
 }
 
-function plus () {
-    activateOperator();
-    //---------- Array changes start ------------------------------------------------------------------
-    var newValue = view.textContent || undefined;
-    var operator = event.target.innerHTML;
-    numbersArray.push(newValue) + operatorArray.push(operator);
-    console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
-    //---------- Array changes end ------------------------------------------------------------------
+function secondaryOperator (targetElement) {
+    //if to prevent clicking operator multiple times causing calculation to repeat
+    if (targetElement.className !== "operatorActive"){
+        //---------- Array changes start ------------------------------------------------------------------
+        var newValue = view.textContent || undefined;
+        var operator = targetElement.innerHTML;
 
-    //---------- Calculation / view + array update start ------------------------------------------------------------------
-    //If there is already a number in the numbers array, calculate
-    if (numbersArray.length>1){
-        view.textContent = eval(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
-        numbersArray.push(view.textContent);
+        numbersArray.push(newValue);
+        console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
+        //---------- Array changes end ------------------------------------------------------------------
+
+        console.log(numbersArray, operatorArray);
+
+        //---------- Calculation / view + array update start ------------------------------------------------------------------
+        //If there is already a number in the numbers array, calculate and delete operator
+        if (numbersArray.length>1){
+            view.textContent = eval(numbersArray[numbersArray.length-2]+operatorArray[operatorArray.length-1]+numbersArray[numbersArray.length-1]);
+            numbersArray.push(view.textContent);
+        }
+        operatorArray.push(operator)
+        //---------- Calculation + array update end ------------------------------------------------------------------
     }
-    console.log(numbersArray, operatorArray);
-    //---------- Calculation + array update end ------------------------------------------------------------------
-
-}
-
-function minus () {
-    
+    activateOperator();
 }
 
 function multiply () {
-    activateOperator();
-    //---------- Array changes start ------------------------------------------------------------------
-    var newValue = view.textContent;
-    var operator = "-";
-    numbersArray.push(newValue) + operatorArray.push(operator);
-    console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
-    //---------- Array changes end ------------------------------------------------------------------
+
 
 }
 
@@ -122,8 +117,5 @@ function calculate () {
 
     console.log(calculation);
     view.textContent = eval(calculation);
+    clearArrays();
 }
-
-//Opties: 
-//zichtbare numbers met javascript loop laten injecteren
-//
