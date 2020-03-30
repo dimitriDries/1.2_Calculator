@@ -78,7 +78,7 @@ function clearArrays () {
 }
 
 function secondaryOperator (targetElement) {
-    //if to prevent clicking operator multiple times causing calculation to repeat
+    //'if' to prevent clicking operator multiple times causing calculation to repeat
     if (targetElement.className !== "operatorActive"){
         //---------- Array changes start ------------------------------------------------------------------
         var newValue = view.textContent || undefined;
@@ -91,8 +91,8 @@ function secondaryOperator (targetElement) {
         console.log(numbersArray, operatorArray);
 
         //---------- Calculation / view + array update start ------------------------------------------------------------------
-        //If there is already a number in the numbers array, calculate and delete operator
-        if (numbersArray.length>1){
+        //If there is already a number in the numbers array, and there is an operator in the operators array, calculate and then delete operator
+        if (numbersArray.length>1 & operatorArray.length>0){
             view.textContent = eval(numbersArray[numbersArray.length-2]+operatorArray[operatorArray.length-1]+numbersArray[numbersArray.length-1]);
             numbersArray.push(view.textContent);
         }
@@ -102,12 +102,30 @@ function secondaryOperator (targetElement) {
     activateOperator();
 }
 
-function multiply () {
+function multiply (targetElement) {
+    //'if' to prevent clicking operator multiple times causing calculation to repeat
+    if (targetElement.className !== "operatorActive"){
+        //---------- Array changes start ------------------------------------------------------------------
+        var newValue = view.textContent || undefined;
+        var operator = targetElement.innerHTML;
 
+        numbersArray.push(newValue);
+        console.log(numbersArray[numbersArray.length-2]+operator+numbersArray[numbersArray.length-1]);
+        //---------- Array changes end ------------------------------------------------------------------
 
-}
+        console.log(numbersArray, operatorArray);
 
-function divide () {
+        //---------- Calculation / view + array update start ------------------------------------------------------------------
+        //If there is already a number in the numbers array, and there is an operator in the operators array, AND it's not a secondary operator calculate and then delete operator
+        if (numbersArray.length>1 & operatorArray.length>0 & operatorArray[operatorArray.length-1] !== '+'||'-'){
+            view.textContent = eval(numbersArray[numbersArray.length-2]+operatorArray[operatorArray.length-1]+numbersArray[numbersArray.length-1]);
+            numbersArray.push(view.textContent);
+        }
+        operatorArray.push(operator)
+        //---------- Calculation + array update end ------------------------------------------------------------------
+    }
+    activateOperator();
+
 }
 
 function calculate () {
